@@ -1,0 +1,98 @@
+/* T3 Code — user style (tuned over CDP, compiled for Stylus) */
+
+[data-timeline-root] {
+  --assistant-bubble-surface: color-mix(in oklab, var(--muted) 72%, var(--background));
+  --assistant-bubble-border: color-mix(in oklab, var(--border) 68%, transparent);
+  --assistant-code-surface: color-mix(
+    in oklab,
+    var(--code-background, var(--background)) 94%,
+    var(--assistant-bubble-surface)
+  );
+  --assistant-code-divider: color-mix(in oklab, var(--border) 68%, transparent);
+}
+
+[data-timeline-row-kind="message"][data-message-role="assistant"] .chat-markdown {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.625rem 0.875rem 0.6875rem;
+  border: 1px solid var(--assistant-bubble-border);
+  border-radius: 1.125rem 1.125rem 1.125rem 0.375rem;
+  background: var(--assistant-bubble-surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+}
+
+[data-timeline-row-kind="message"][data-message-role="assistant"]
+  .chat-markdown
+  :is(.chat-markdown-codeblock, .chat-markdown-code-block),
+[data-timeline-row-kind="message"][data-message-role="assistant"] .chat-markdown > pre {
+  width: auto;
+  max-width: none;
+  margin: 0.6875rem -0.875rem;
+  border: 0;
+  border-block: 1px solid var(--assistant-code-divider);
+  border-radius: 0;
+  background: var(--assistant-code-surface);
+  box-shadow: none;
+}
+
+[data-timeline-row-kind="turn-fold"] > div {
+  border-bottom: 0;
+}
+
+[data-timeline-row-kind="work"],
+[data-timeline-row-kind="work-live"],
+[data-timeline-row-kind="work-toggle"],
+[data-timeline-row-kind="working"] {
+  --foreground: var(--muted-foreground);
+  --message-foreground: var(--muted-foreground);
+  --code-foreground: var(--muted-foreground);
+  --destructive: var(--muted-foreground);
+  --error-foreground: var(--muted-foreground);
+  --warning: var(--muted-foreground);
+  --contrast-foreground: var(--muted-foreground);
+  --contrast-message-foreground: var(--muted-foreground);
+}
+
+:is(
+  [data-timeline-row-kind="work"],
+  [data-timeline-row-kind="work-live"],
+  [data-timeline-row-kind="work-toggle"],
+  [data-timeline-row-kind="working"]
+),
+:is(
+  [data-timeline-row-kind="work"],
+  [data-timeline-row-kind="work-live"],
+  [data-timeline-row-kind="work-toggle"],
+  [data-timeline-row-kind="working"]
+) * {
+  color: var(--muted-foreground);
+}
+
+*:has(
+  > [data-timeline-root] > [data-timeline-row-kind="message"][data-message-role="assistant"]
+):has(
+  + * > [data-timeline-root] > [data-timeline-row-kind^="work"]
+) [data-timeline-row-kind="message"][data-message-role="assistant"],
+*:has(
+  > [data-timeline-root] > [data-timeline-row-kind="message"][data-message-role="assistant"]
+):has(
+  + * > [data-timeline-root] > [data-timeline-row-kind^="work"]
+) [data-timeline-row-kind="message"][data-message-role="assistant"] * {
+  color: var(--muted-foreground);
+}
+
+[data-timeline-row-kind^="work"] p > span:nth-child(2):last-child,
+[data-timeline-row-kind^="work"] pre {
+  color: color-mix(in oklab, var(--muted-foreground), var(--background) 25%);
+  font-family: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace
+  );
+}
